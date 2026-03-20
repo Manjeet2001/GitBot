@@ -1,5 +1,5 @@
 import os
-import time
+import streamlit as st
 import logging
 from google import genai
 from google.genai import types
@@ -9,7 +9,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY", "")
 LLM_MODEL      = "gemini-2.5-flash" 
 
 SYSTEM_PROMPT = """You are GitBot, an expert AI assistant specializing exclusively in GitLab's Handbook and Direction pages. You help GitLab employees and candidates understand GitLab's culture, processes, values, strategy, and product direction.
