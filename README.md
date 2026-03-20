@@ -1,5 +1,7 @@
 # 🦊 GitBot — GenAI Chatbot for GitLab Handbook & Direction
 
+🚀 **Live Demo:** [https://gitbot-vre2lxvgauezzadpxafcwc.streamlit.app/](https://gitbot-vre2lxvgauezzadpxafcwc.streamlit.app/)
+
 > An AI-powered chatbot that lets you explore GitLab's Handbook and Product Direction pages through natural language conversation — built with Google Gemini, RAG, and Streamlit.
 
 ---
