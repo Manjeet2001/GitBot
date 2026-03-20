@@ -11,7 +11,12 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
-GEMINI_API_KEY   = os.getenv("GEMINI_API_KEY", "")
+import streamlit as st
+
+try:
+    GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+except Exception:
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 EMBED_MODEL      = "gemini-embedding-001"   # 3072-dim (replaces deprecated text-embedding-004)
 CHROMA_DB_DIR    = "vectorstore"
 CHROMA_COLLECTION= "gitlab_chunks"

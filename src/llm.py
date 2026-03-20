@@ -9,8 +9,11 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
-GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY", "")
-LLM_MODEL      = "gemini-2.5-flash" 
+try:
+    GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+except Exception:
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+LLM_MODEL      = "gemini-2.5-flash"
 
 SYSTEM_PROMPT = """You are GitBot, an expert AI assistant specializing exclusively in GitLab's Handbook and Direction pages. You help GitLab employees and candidates understand GitLab's culture, processes, values, strategy, and product direction.
 
@@ -101,7 +104,7 @@ def generate_response(
             config=types.GenerateContentConfig(
                 system_instruction=SYSTEM_PROMPT,
                 temperature=temperature,
-                max_output_tokens=1024,
+                max_output_tokens=4096,
             ),
         )
 
