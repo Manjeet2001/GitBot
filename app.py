@@ -387,8 +387,7 @@ with st.sidebar:
 **Data Sources:**
 - 📖 [GitLab Handbook](https://handbook.gitlab.com)
 - 🗺 [GitLab Direction](https://about.gitlab.com/direction)
-
-**Stack:** Gemini 1.5 Flash + ChromaDB + Streamlit
+**Stack:** Gemini 2.5 Flash + ChromaDB + Streamlit
     """)
 
     st.markdown("---")
