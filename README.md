@@ -38,12 +38,12 @@ User Query
          │ top-K chunks + similarity scores
          ▼
 ┌──────────────────┐
-│   Gemini LLM     │  ← gemini-1.5-flash with RAG prompt
+│   Gemini LLM     │  ← gemini-2.5-flash
 │    (llm.py)      │
 └────────┬─────────┘
          │
          ▼
-  Answer + Sources + Confidence Badge → Streamlit UI
+  Answer + Sources + Confidence Badge + Suggested Questions → Streamlit UI
 ```
 
 ---
@@ -58,7 +58,7 @@ User Query
 
 ```bash
 git clone <your-repo-url>
-cd RAG
+cd <your project name>
 pip install -r requirements.txt
 ```
 
@@ -90,7 +90,7 @@ python scripts/build_index.py --rebuild          # Force full rebuild
 ### 4. Run the Chatbot
 
 ```bash
-streamlit run app.py
+python -m streamlit run app.py
 ```
 
 Opens at **http://localhost:8501** 🎉
@@ -107,7 +107,7 @@ Opens at **http://localhost:8501** 🎉
 RAG/
 ├── app.py                   # Streamlit chatbot application
 ├── requirements.txt         # Python dependencies
-├── supabase_setup.sql       # SQL schema for Supabase deployment
+├── vectorstore/             # ChromaDB vector database directory
 ├── .env.example             # Environment variable template
 ├── .streamlit/
 │   └── config.toml          # Dark theme configuration
@@ -119,7 +119,8 @@ RAG/
     ├── embeddings.py        # Gemini embeddings + ChromaDB
     ├── retriever.py         # Similarity search
     ├── llm.py               # Gemini response generation
-    └── guardrails.py        # Topic guardrail + confidence scoring
+    ├── guardrails.py        # Topic guardrail + confidence scoring
+    └── rate_limit.py        # Rate limiting for Gemini API
 ```
 
 ---
@@ -159,12 +160,6 @@ Queries go through **three checks** before hitting the LLM:
 | `GEMINI_API_KEY not set` | Add key to `.env` from [aistudio.google.com](https://aistudio.google.com) |
 | `ChromaDB error` | Make sure `python scripts/build_index.py --rebuild` ran completely |
 | Scraper too slow | Use `--max-pages 50` for a quick test |
-
----
-
-## 📄 License
-
-MIT — free for educational use.
 
 ---
 
